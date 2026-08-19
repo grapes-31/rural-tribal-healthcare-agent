@@ -1,0 +1,422 @@
+# rural-tribal-healthcare-agent
+
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<title>Rural &amp; Tribal Healthcare Access Agent — Blueprint</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,"Segoe UI",system-ui,sans-serif;background:#f7f8fa;color:#1f2328;font-size:14px;line-height:1.6;padding:32px 16px}
+  h1{font-size:1.35rem;font-weight:800;color:#1f2328;margin-bottom:4px}
+  .subtitle{color:#57606a;font-size:.85rem;margin-bottom:28px}
+  .badge{display:inline-block;background:#3b82d4;color:#fff;font-size:.68rem;padding:2px 9px;border-radius:999px;margin-left:8px;vertical-align:middle;font-weight:600}
+  .badge.green{background:#1a7f4b}
+  .badge.purple{background:#7c5cd8}
+
+  /* Section headings */
+  .section{max-width:760px;margin:0 auto 28px}
+  .section-title{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:#57606a;border-bottom:1px solid #e5e7eb;padding-bottom:6px;margin-bottom:14px}
+
+  /* ── Architecture diagram (SVG) ── */
+  .diagram-wrap{max-width:760px;margin:0 auto 32px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:24px;overflow-x:auto}
+  svg text{font-family:-apple-system,"Segoe UI",system-ui,sans-serif}
+
+  /* ── Cards grid ── */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+  .card{background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:14px 16px}
+  .card .icon{font-size:1.3rem;margin-bottom:6px}
+  .card h3{font-size:.82rem;font-weight:700;color:#1f2328;margin-bottom:4px}
+  .card p{font-size:.78rem;color:#57606a;line-height:1.55}
+
+  /* ── Flow steps ── */
+  .flow{display:flex;flex-wrap:wrap;gap:0;align-items:stretch;max-width:760px;margin:0 auto 28px}
+  .step{flex:1;min-width:110px;background:#fff;border:1px solid #e5e7eb;padding:12px 14px;position:relative}
+  .step:first-child{border-radius:10px 0 0 10px}
+  .step:last-child{border-radius:0 10px 10px 0}
+  .step:not(:last-child)::after{content:"›";position:absolute;right:-10px;top:50%;transform:translateY(-50%);font-size:1.3rem;color:#3b82d4;z-index:1;background:#f7f8fa;padding:0 2px}
+  .step .num{font-size:.65rem;font-weight:700;color:#3b82d4;text-transform:uppercase;letter-spacing:.8px}
+  .step h4{font-size:.8rem;font-weight:700;color:#1f2328;margin:3px 0}
+  .step p{font-size:.74rem;color:#57606a}
+
+  /* ── Table ── */
+  table{width:100%;border-collapse:collapse;font-size:.8rem}
+  th{background:#f7f8fa;color:#57606a;font-weight:700;font-size:.72rem;text-transform:uppercase;letter-spacing:.8px;padding:8px 12px;border:1px solid #e5e7eb;text-align:left}
+  td{padding:8px 12px;border:1px solid #e5e7eb;color:#1f2328;vertical-align:top}
+  tr:nth-child(even) td{background:#fafbfc}
+  .tag{display:inline-block;padding:1px 7px;border-radius:999px;font-size:.68rem;font-weight:600}
+  .tag.blue{background:#dbeafe;color:#1e40af}
+  .tag.green{background:#dcfce7;color:#166534}
+  .tag.purple{background:#ede9fe;color:#6d28d9}
+  .tag.red{background:#fee2e2;color:#991b1b}
+  .tag.orange{background:#ffedd5;color:#9a3412}
+
+  /* ── Two-col layout ── */
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:760px;margin:0 auto 28px}
+  @media(max-width:520px){.two-col{grid-template-columns:1fr}.step:not(:last-child)::after{content:none}}
+
+  /* ── Stack layer ── */
+  .stack{display:flex;flex-direction:column;gap:8px;max-width:760px;margin:0 auto 28px}
+  .layer{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:10px 14px}
+  .layer .lnum{width:24px;height:24px;border-radius:50%;background:#3b82d4;color:#fff;font-size:.72rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .layer .lnum.green{background:#1a7f4b}
+  .layer .lnum.purple{background:#7c5cd8}
+  .layer .lnum.red{background:#b91c1c}
+  .layer .lnum.orange{background:#c2410c}
+  .layer h4{font-size:.82rem;font-weight:700;color:#1f2328;margin-bottom:2px}
+  .layer p{font-size:.76rem;color:#57606a}
+
+  footer{max-width:760px;margin:32px auto 0;text-align:center;font-size:.72rem;color:#57606a;border-top:1px solid #e5e7eb;padding-top:14px}
+</style>
+</head>
+<body>
+
+
+<div style="max-width:760px;margin:0 auto 28px">
+  <h1>🏥 Rural &amp; Tribal Healthcare Access Agent
+    <span class="badge">IBM Granite</span>
+    <span class="badge green">watsonx.ai</span>
+  </h1>
+  <p class="subtitle">Full System Architecture Blueprint — ibm/granite-4-h-small · eu-de · Flask · Python</p>
+</div>
+
+
+<div class="section">
+  <div class="section-title">1. System Architecture Diagram</div>
+</div>
+
+<div class="diagram-wrap">
+<svg width="100%" xmlns="http://www.w3.org/2000/svg">
+
+  
+  <rect x="10" y="130" width="100" height="64" rx="8" fill="#dbeafe" stroke="#3b82d4" stroke-width="1.5"></rect>
+  <text x="60" y="152" text-anchor="middle" font-size="18">👤</text>
+  <text x="60" y="172" text-anchor="middle" font-size="11" font-weight="700" fill="#1e40af">User</text>
+  <text x="60" y="185" text-anchor="middle" font-size="9" fill="#3b82d4">Browser / CLI</text>
+
+  
+  <line x1="110" y1="162" x2="178" y2="162" stroke="#3b82d4" stroke-width="1.5" marker-end="url(#arr)"></line>
+  <text x="144" y="155" text-anchor="middle" font-size="9" fill="#57606a">HTTP POST</text>
+  <text x="144" y="167" text-anchor="middle" font-size="9" fill="#57606a">/chat</text>
+
+  
+  <rect x="180" y="100" width="130" height="124" rx="8" fill="#f0fdf4" stroke="#1a7f4b" stroke-width="1.5"></rect>
+  <text x="245" y="122" text-anchor="middle" font-size="10" font-weight="700" fill="#166534">FLASK APP</text>
+  <text x="245" y="137" text-anchor="middle" font-size="9" fill="#166534">app.py</text>
+  <line x1="190" y1="144" x2="300" y2="144" stroke="#bbf7d0" stroke-width="1"></line>
+  <text x="245" y="160" text-anchor="middle" font-size="9" fill="#1f2328">build_prompt()</text>
+  <text x="245" y="175" text-anchor="middle" font-size="9" fill="#1f2328">conversation_history[]</text>
+  <text x="245" y="190" text-anchor="middle" font-size="9" fill="#1f2328">generate_response()</text>
+  <text x="245" y="205" text-anchor="middle" font-size="9" fill="#1f2328">Routes: / /chat /reset</text>
+
+  
+  <line x1="245" y1="100" x2="245" y2="58" stroke="#7c5cd8" stroke-width="1.5" marker-end="url(#arr2)"></line>
+  <text x="270" y="82" text-anchor="middle" font-size="9" fill="#57606a">API Key</text>
+
+  
+  <rect x="170" y="14" width="150" height="44" rx="8" fill="#ede9fe" stroke="#7c5cd8" stroke-width="1.5"></rect>
+  <text x="245" y="33" text-anchor="middle" font-size="10" font-weight="700" fill="#6d28d9">IBM Cloud IAM</text>
+  <text x="245" y="48" text-anchor="middle" font-size="9" fill="#6d28d9">iam.cloud.ibm.com</text>
+
+  
+  <line x1="315" y1="36" x2="360" y2="36" stroke="#7c5cd8" stroke-width="1.2"></line>
+  <text x="338" y="29" text-anchor="middle" font-size="9" fill="#7c5cd8">Bearer Token</text>
+
+  
+  <line x1="310" y1="162" x2="388" y2="162" stroke="#1a7f4b" stroke-width="1.5" marker-end="url(#arr3)"></line>
+  <text x="349" y="155" text-anchor="middle" font-size="9" fill="#57606a">Prompt</text>
+  <text x="349" y="167" text-anchor="middle" font-size="9" fill="#57606a">+ Params</text>
+
+  
+  <rect x="390" y="100" width="148" height="124" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"></rect>
+  <text x="464" y="122" text-anchor="middle" font-size="10" font-weight="700" fill="#92400e">WATSONX.AI</text>
+  <text x="464" y="137" text-anchor="middle" font-size="9" fill="#b45309">eu-de.ml.cloud.ibm.com</text>
+  <line x1="400" y1="144" x2="528" y2="144" stroke="#fde68a" stroke-width="1"></line>
+  <text x="464" y="160" text-anchor="middle" font-size="9" fill="#1f2328">ibm/granite-4-h-small</text>
+  <text x="464" y="175" text-anchor="middle" font-size="9" fill="#1f2328">decoding: greedy</text>
+  <text x="464" y="190" text-anchor="middle" font-size="9" fill="#1f2328">max_tokens: 600</text>
+  <text x="464" y="205" text-anchor="middle" font-size="9" fill="#1f2328">rep_penalty: 1.1</text>
+
+  
+  <line x1="390" y1="178" x2="312" y2="178" stroke="#d97706" stroke-width="1.5" marker-end="url(#arr4)"></line>
+  <text x="351" y="196" text-anchor="middle" font-size="9" fill="#57606a">JSON response</text>
+
+  
+  <line x1="180" y1="178" x2="112" y2="178" stroke="#1a7f4b" stroke-width="1.5" marker-end="url(#arr5)"></line>
+  <text x="146" y="196" text-anchor="middle" font-size="9" fill="#57606a">reply JSON</text>
+
+  
+  <rect x="560" y="100" width="148" height="124" rx="8" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5"></rect>
+  <text x="634" y="122" text-anchor="middle" font-size="10" font-weight="700" fill="#334155">SYSTEM PROMPT</text>
+  <line x1="570" y1="130" x2="698" y2="130" stroke="#cbd5e1" stroke-width="1"></line>
+  <text x="634" y="147" text-anchor="middle" font-size="8.5" fill="#475569">Symptom Guidance</text>
+  <text x="634" y="161" text-anchor="middle" font-size="8.5" fill="#475569">Telemedicine</text>
+  <text x="634" y="175" text-anchor="middle" font-size="8.5" fill="#475569">Govt Schemes</text>
+  <text x="634" y="189" text-anchor="middle" font-size="8.5" fill="#475569">Maternal Health</text>
+  <text x="634" y="203" text-anchor="middle" font-size="8.5" fill="#475569">Emergency (108)</text>
+  <text x="634" y="217" text-anchor="middle" font-size="8.5" fill="#475569">Mental Health</text>
+
+  
+  <line x1="560" y1="150" x2="540" y2="150" stroke="#64748b" stroke-width="1.2" marker-end="url(#arr6)"></line>
+
+  
+  <rect x="390" y="254" width="148" height="54" rx="8" fill="#fff7ed" stroke="#ea580c" stroke-width="1.5"></rect>
+  <text x="464" y="274" text-anchor="middle" font-size="10" font-weight="700" fill="#9a3412">CONV. HISTORY</text>
+  <text x="464" y="290" text-anchor="middle" font-size="8.5" fill="#c2410c">In-memory list[dict]</text>
+  <text x="464" y="303" text-anchor="middle" font-size="8.5" fill="#c2410c">Last 6 turns (3 exchanges)</text>
+
+  
+  <line x1="390" y1="270" x2="312" y2="210" stroke="#ea580c" stroke-width="1.2"></line>
+
+  
+  <rect x="10" y="254" width="148" height="54" rx="8" fill="#f0f9ff" stroke="#0284c7" stroke-width="1.5"></rect>
+  <text x="84" y="274" text-anchor="middle" font-size="10" font-weight="700" fill="#075985">HTML/CSS/JS UI</text>
+  <text x="84" y="290" text-anchor="middle" font-size="8.5" fill="#0369a1">render_template_string()</text>
+  <text x="84" y="303" text-anchor="middle" font-size="8.5" fill="#0369a1">Sidebar · Bubbles · Typing</text>
+
+  
+  <defs>
+    <marker id="arr"><polygon points="0 0,7 3.5,0 7" fill="#3b82d4"></polygon></marker>
+    <marker id="arr2"><polygon points="0 0,7 3.5,0 7" fill="#7c5cd8"></polygon></marker>
+    <marker id="arr3"><polygon points="0 0,7 3.5,0 7" fill="#1a7f4b"></polygon></marker>
+    <marker id="arr4"><polygon points="0 0,7 3.5,0 7" fill="#d97706"></polygon></marker>
+    <marker id="arr5"><polygon points="0 0,7 3.5,0 7" fill="#1a7f4b"></polygon></marker>
+    <marker id="arr6"><polygon points="0 0,7 3.5,0 7" fill="#64748b"></polygon></marker>
+  </defs>
+</svg>
+</div>
+
+
+<div class="section">
+  <div class="section-title">2. Request Flow — Step by Step</div>
+  <div class="flow">
+    <div class="step">
+      <div class="num">Step 1</div>
+      <h4>User Input</h4>
+      <p>Browser sends POST /chat with JSON message</p>
+    </div>
+    <div class="step">
+      <div class="num">Step 2</div>
+      <h4>IAM Auth</h4>
+      <p>Flask exchanges API Key → Bearer token from IBM Cloud IAM</p>
+    </div>
+    <div class="step">
+      <div class="num">Step 3</div>
+      <h4>Prompt Build</h4>
+      <p>System prompt + last 6 history turns + user message assembled</p>
+    </div>
+    <div class="step">
+      <div class="num">Step 4</div>
+      <h4>Granite Call</h4>
+      <p>POST to watsonx.ai with model_id, project_id, parameters</p>
+    </div>
+    <div class="step">
+      <div class="num">Step 5</div>
+      <h4>Response</h4>
+      <p>Generated text stripped, stored in history, returned as JSON</p>
+    </div>
+    <div class="step">
+      <div class="num">Step 6</div>
+      <h4>UI Render</h4>
+      <p>Browser appends agent bubble, hides typing indicator</p>
+    </div>
+  </div>
+</div>
+
+
+<div class="section">
+  <div class="section-title">3. Technology Stack</div>
+  <div class="stack">
+    <div class="layer">
+      <div class="lnum">UI</div>
+      <div>
+        <h4>Frontend — HTML5 / CSS3 / Vanilla JS</h4>
+        <p>Single-page chat UI · render_template_string() · Sidebar quick topics · Typing indicator · Auto-resize textarea</p>
+      </div>
+    </div>
+    <div class="layer">
+      <div class="lnum green">BE</div>
+      <div>
+        <h4>Backend — Python 3 · Flask 3.x</h4>
+        <p>Routes: GET / · POST /chat · POST /reset · In-memory conversation_history list · threading.Lock for token safety</p>
+      </div>
+    </div>
+    <div class="layer">
+      <div class="lnum purple">AI</div>
+      <div>
+        <h4>LLM — IBM Granite (ibm/granite-4-h-small) on watsonx.ai</h4>
+        <p>Endpoint: eu-de.ml.cloud.ibm.com · greedy decoding · max_new_tokens: 600 · repetition_penalty: 1.1 · stop_sequences: ["User:","Human:"]</p>
+      </div>
+    </div>
+    <div class="layer">
+      <div class="lnum red">AUTH</div>
+      <div>
+        <h4>Auth — IBM Cloud IAM</h4>
+        <p>API Key → Bearer token exchange on every request · grant_type: urn:ibm:params:oauth:grant-type:apikey</p>
+      </div>
+    </div>
+    <div class="layer">
+      <div class="lnum orange">PKG</div>
+      <div>
+        <h4>Dependencies — requirements.txt</h4>
+        <p>flask &gt;= 3.0.0 · requests &gt;= 2.31.0 · Runtime: Anaconda Python (C:\Users\nairm\anaconda3\python.exe)</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="section">
+  <div class="section-title">4. Project File Structure</div>
+  <table>
+    <tr>
+      <th>File</th><th>Role</th><th>Key Contents</th><th>Type</th>
+    </tr>
+    <tr>
+      <td><strong>app.py</strong></td>
+      <td>Flask web server + HTML UI</td>
+      <td>get_iam_token(), generate_response(), build_prompt(), HTML template, /chat /reset routes</td>
+      <td><span class="tag green">Web Server</span></td>
+    </tr>
+    <tr>
+      <td><strong>agent.py</strong></td>
+      <td>Standalone CLI chatbot</td>
+      <td>HealthAgent class, _build_prompt(), chat(), reset(), main() loop</td>
+      <td><span class="tag blue">CLI Agent</span></td>
+    </tr>
+    <tr>
+      <td><strong>requirements.txt</strong></td>
+      <td>Python dependencies</td>
+      <td>flask&gt;=3.0.0, requests&gt;=2.31.0</td>
+      <td><span class="tag purple">Config</span></td>
+    </tr>
+    <tr>
+      <td><strong>README.md</strong></td>
+      <td>Setup guide &amp; usage docs</td>
+      <td>Run instructions, feature table, example session, disclaimer</td>
+      <td><span class="tag orange">Docs</span></td>
+    </tr>
+  </table>
+</div>
+
+
+<div class="section">
+  <div class="section-title">5. Agent Capability Modules</div>
+  <div class="grid">
+    <div class="card">
+      <div class="icon">🤒</div>
+      <h3>Symptom Guidance</h3>
+      <p>First-aid advice, urgency triage, when to seek immediate care vs. home management</p>
+    </div>
+    <div class="card">
+      <div class="icon">🏥</div>
+      <h3>Nearby Facilities</h3>
+      <p>PHC, CHC, District Hospital, AYUSH centres — how to locate and access them</p>
+    </div>
+    <div class="card">
+      <div class="icon">📱</div>
+      <h3>Telemedicine</h3>
+      <p>eSanjeevani portal guidance, how to register and use government telehealth</p>
+    </div>
+    <div class="card">
+      <div class="icon">💊</div>
+      <h3>Govt Schemes</h3>
+      <p>Ayushman Bharat PMJAY, NRHM, Janani Suraksha Yojana, tribal health sub-plans</p>
+    </div>
+    <div class="card">
+      <div class="icon">🤰</div>
+      <h3>Maternal &amp; Child</h3>
+      <p>Antenatal care, immunisation schedules, Anganwadi ICDS nutrition, safe delivery</p>
+    </div>
+    <div class="card">
+      <div class="icon">🧠</div>
+      <h3>Mental Health</h3>
+      <p>NIMHANS helpline, iCall, Vandrevala Foundation, stress and trauma support</p>
+    </div>
+    <div class="card">
+      <div class="icon">🌿</div>
+      <h3>Traditional Medicine</h3>
+      <p>Culturally respectful guidance; bridges traditional and modern healthcare</p>
+    </div>
+    <div class="card">
+      <div class="icon">🚨</div>
+      <h3>Emergency Protocol</h3>
+      <p>Always directs to 108 (EMRI) for life-threatening situations; interim guidance</p>
+    </div>
+  </div>
+</div>
+
+
+<div class="section">
+  <div class="section-title">6. IBM watsonx.ai API Configuration</div>
+  <table>
+    <tr><th>Parameter</th><th>Value</th><th>Purpose</th></tr>
+    <tr><td>model_id</td><td>ibm/granite-4-h-small</td><td>IBM Granite LLM</td></tr>
+    <tr><td>project_id</td><td>bba47c87-2198-…</td><td>watsonx.ai project</td></tr>
+    <tr><td>endpoint</td><td>eu-de.ml.cloud.ibm.com</td><td>Europe (Germany) region</td></tr>
+    <tr><td>decoding_method</td><td>greedy</td><td>Deterministic output</td></tr>
+    <tr><td>max_new_tokens</td><td>600</td><td>Max response length</td></tr>
+    <tr><td>min_new_tokens</td><td>30</td><td>Ensures meaningful reply</td></tr>
+    <tr><td>repetition_penalty</td><td>1.1</td><td>Reduces repetition</td></tr>
+    <tr><td>stop_sequences</td><td>["User:", "Human:"]</td><td>Prevents role hallucination</td></tr>
+    <tr><td>history_window</td><td>Last 6 turns</td><td>3-exchange memory context</td></tr>
+  </table>
+</div>
+
+
+<div class="section">
+  <div class="section-title">7. Flask Routes &amp; Endpoints</div>
+  <table>
+    <tr><th>Method</th><th>Route</th><th>Description</th><th>Returns</th></tr>
+    <tr>
+      <td><span class="tag blue">GET</span></td>
+      <td>/</td>
+      <td>Serve the full chat web UI</td>
+      <td>HTML page</td>
+    </tr>
+    <tr>
+      <td><span class="tag green">POST</span></td>
+      <td>/chat</td>
+      <td>Receive user message → call Granite → return reply</td>
+      <td>{"response": "…"}</td>
+    </tr>
+    <tr>
+      <td><span class="tag orange">POST</span></td>
+      <td>/reset</td>
+      <td>Clear conversation_history list</td>
+      <td>{"status": "ok"}</td>
+    </tr>
+  </table>
+</div>
+
+
+<div class="section">
+  <div class="section-title">8. Run Instructions</div>
+  <table>
+    <tr><th>Step</th><th>Command</th><th>Notes</th></tr>
+    <tr>
+      <td>1. Install deps</td>
+      <td style="font-family:monospace;font-size:.78rem">C:\Users\nairm\anaconda3\python.exe -m pip install flask requests</td>
+      <td>One-time setup via Anaconda Python</td>
+    </tr>
+    <tr>
+      <td>2. Start web server</td>
+      <td style="font-family:monospace;font-size:.78rem">C:\Users\nairm\anaconda3\python.exe app.py</td>
+      <td>Starts Flask on port 5000</td>
+    </tr>
+    <tr>
+      <td>3. Open browser</td>
+      <td style="font-family:monospace;font-size:.78rem">http://localhost:5000</td>
+      <td>Full chat UI accessible here</td>
+    </tr>
+    <tr>
+      <td>4. CLI alternative</td>
+      <td style="font-family:monospace;font-size:.78rem">C:\Users\nairm\anaconda3\python.exe agent.py</td>
+      <td>Terminal-based chat agent</td>
+    </tr>
+  </table>
+</div>
+
+<footer>Made with IBM Bob</footer>
+</body>
+</html>
